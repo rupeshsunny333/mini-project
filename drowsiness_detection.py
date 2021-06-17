@@ -92,8 +92,10 @@ while(True):
             lbl='Closed'
         break
     print(saved1," ",saved2)
-    if(saved1==1 or saved2==1):
-        score=score+1
+    if(saved1==1 and saved2==1):
+        if score < 10:
+            score=score+1
+
         cv2.putText(frame,"Closed",(10,height-20), font, 1,(255,255,255),1,cv2.LINE_AA)
     # if(rpred[0]==1 or lpred[0]==1):
     else:
@@ -104,7 +106,7 @@ while(True):
     if(score<0):
         score=0   
     cv2.putText(frame,'Score:'+str(score),(100,height-20), font, 1,(255,255,255),1,cv2.LINE_AA)
-    if(score>15):
+    if(score >= 10):
         #person is feeling sleepy so we beep the alarm
         cv2.imwrite('image.jpg',frame)
         try:
